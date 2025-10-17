@@ -103,8 +103,8 @@ Follow these steps to get the NewsHub application running locally.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/woruz/new-backend.git
-cd new-backend
+git clone https://github.com/woruz/news-frontend.git
+cd news-frontend
 ```
 
 ### 2. Install dependencies
@@ -115,11 +115,10 @@ npm install
 
 ```
 
-### 3. Run the seed file and create env file
+### 3. create env file
 
 ```bash
 cp .env.sample .env
-npm run seed
 ```
 
 ### 4. Start the application
@@ -129,142 +128,42 @@ npm run dev
 
 ---
 
-## ✅ API Reference
-
-### `POST /api/auth/login`
-
-Admin login. Returns a JWT token.
-
-```json payload
-{
-  "username": "admin",
-  "password": "admin123"
-}
-
-```json response
-{
-  "token": "your_jwt_token_here"
-}
-
-
-Get all articles.
-### `GET /api/articles?page=1&limit=6&category=Technology&q=AI`
-
-```json
-{
-  "articles": [
-    {
-      "_id": "64f8e3a1b1234567890abcd",
-      "title": "Example Article",
-      "slug": "example-article",
-      "content": "Full article content...",
-      "excerpt": "Short summary...",
-      "category": "Technology",
-      "author": { "name": "John Doe" },
-      "imageUrl": "https://example.com/image.jpg",
-      "publishedAt": "2025-10-17T00:00:00Z",
-      "tags": ["AI", "Tech"],
-      "readingTime": 5
-    }
-  ],
-  "totalPages": 3,
-  "currentPage": 1
-}
-
-
-Get articles by id.
-### `GET /api/articles/:id`
-
-```json
-{
-  "article": {
-    "_id": "64f8e3a1b1234567890abcd",
-    "title": "Example Article",
-    "slug": "example-article",
-    "content": "Full article content...",
-    "excerpt": "Short summary...",
-    "category": "Technology",
-    "author": { "name": "John Doe" },
-    "imageUrl": "https://example.com/image.jpg",
-    "publishedAt": "2025-10-17T00:00:00Z",
-    "tags": ["AI", "Tech"],
-    "readingTime": 5
-  }
-}
-
-Create a new articles.
-### `POST /api/articles`(Protected)
-
-```json payload
-{
-  "title": "New Article",
-  "slug": "new-article",
-  "content": "Article content...",
-  "excerpt": "Short summary...",
-  "category": "Technology",
-  "author": { "name": "John Doe" },
-  "imageUrl": "https://example.com/image.jpg",
-  "publishedAt": "2025-10-17T00:00:00Z",
-  "tags": ["AI", "Tech"]
-}
-
-```json response
-{
-  "_id": "64f8f1b2b1234567890efgh",
-  "title": "New Article",
-  "slug": "new-article",
-  "content": "Article content...",
-  "excerpt": "Short summary...",
-  "category": "Technology",
-  "author": { "name": "John Doe" },
-  "imageUrl": "https://example.com/image.jpg",
-  "publishedAt": "2025-10-17T00:00:00Z",
-  "tags": ["AI", "Tech"],
-  "readingTime": 5
-}
-
-Update an articles.
-
-###PUT /api/articles/:id (Protected)
-
-```json payload
-{
-  "_id": "64f8f1b2b1234567890efgh",
-  "title": "Updated Article",
-  "slug": "updated-article",
-  "content": "Updated content...",
-  "excerpt": "Updated summary...",
-  "category": "Technology",
-  "author": { "name": "John Doe" },
-  "imageUrl": "https://example.com/image.jpg",
-  "publishedAt": "2025-10-17T00:00:00Z",
-  "tags": ["AI", "Tech"],
-  "readingTime": 6
-}
-
-Delete an articles.
-
-### DELETE /api/articles/:id (Protected)
-```
-
----
-
 ## 📁 Folder Structure
 
 ```
-newshub-backend/
+newshub-frontend/
+├── public/
+│   └── index.html
 ├── src/
-│   ├── controllers/       # Route handlers for auth & articles
-│   ├── middlewares/       # JWT auth middleware, validation
-│   ├── models/            # Mongoose models (Article, Admin)
-│   ├── routes/            # Express routes (authRoutes, articleRoutes)
-│   ├── utils/             # Helper functions
-│   └── app.ts             # Starting the server
-|   └── server.ts          # App entry point
+│   ├── api/
+│   │   └── api.ts            # Axios instance & auth token helper
+│   ├── assets/
+│   │   └── images/           # Static images, logos
+│   ├── components/
+│   │   ├── Layout.tsx        # Main layout wrapper
+│   │   ├── Navbar.tsx
+│   │   ├── Loader.tsx
+│   │   ├── Pagination.tsx
+│   │   └── ArticleCard.tsx
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   ├── ArticleDetail.tsx
+│   │   └── admin/
+│   │       ├── Dashboard.tsx
+│   │       ├── CreateArticle.tsx
+│   │       ├── EditArticle.tsx
+│   │       └── Login.tsx
+│   ├── types/
+│   │   └── article.ts        # Article type definitions
+│   ├── utils/
+│   │   └── helpers.ts        # Utility functions
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── .env
 ├── package.json
 ├── tsconfig.json
-├── .env
-└── README.md
+└── vite.config.ts
 ```
 
 ---
