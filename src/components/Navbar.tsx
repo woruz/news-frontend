@@ -108,9 +108,10 @@ const Navbar = () => {
           <li>
             <Link to="/?category=Entertainment" className="hover:text-blue-500">Entertainment</Link>
           </li>
+          <li><Link to="/admin" className="hover:text-blue-500">Admin</Link></li>
           {isAdmin ? (
             <>
-              <li><Link to="/admin" className="hover:text-blue-500">Admin</Link></li>
+              {/* <li><Link to="/admin" className="hover:text-blue-500">Admin</Link></li> */}
               <li><button onClick={handleLogout} className="text-red-500">Logout</button></li>
             </>
           ) : null}
@@ -146,9 +147,10 @@ const Navbar = () => {
           <li>
             <Link to="/?category=Entertainment" onClick={() => { setOpen(false); handleCategoryChange("Entertainment"); }}>Entertainment</Link>
           </li>
+          <li><Link to="/admin" onClick={() => setOpen(false)}>Admin</Link></li>
           {isAdmin && (
             <>
-              <li><Link to="/admin" onClick={() => setOpen(false)}>Admin</Link></li>
+              {/* <li><Link to="/admin" onClick={() => setOpen(false)}>Admin</Link></li> */}
               <li><button onClick={handleLogout} className="text-red-500">Logout</button></li>
             </>
           )}
